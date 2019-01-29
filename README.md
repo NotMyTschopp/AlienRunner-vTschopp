@@ -3,7 +3,7 @@ Alien Runner is a simple 2D-game developed with Unity. The player controls an al
 
 **Important:** this project is a student project, it's not meant to be performant.
 
-##Progress
+## Progress
 0% done.
 * [ ] Create sprites for UFO, Neanderthals and world
 * [ ] Create player movement
