@@ -14,10 +14,10 @@ using UnityEngine;
 
 public class FuelGauge : MonoBehaviour {
 
-    public Texture2D fuelIcon;
+    [SerializeField] Texture2D fuelIcon;
 
-    public GUIStyle fuelBarStyle = new GUIStyle();
-    public GUIStyle fuelBarStyleBackground = new GUIStyle();
+    [SerializeField] GUIStyle fuelBarStyle = new GUIStyle();
+    [SerializeField] GUIStyle fuelBarStyleBackground = new GUIStyle();
 
     private Vector2 position = new Vector2(20, 20);
     private Vector2 size = new Vector2(200, 20);
