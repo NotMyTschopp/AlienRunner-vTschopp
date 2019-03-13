@@ -16,8 +16,12 @@ public class Controls : MonoBehaviour {
 
     [SerializeField] Canvas gameCanvas;
 
+    private float smoothTime = 0.3f;
+
     private GameObject ufo;
+
     private Vector2 resolution;
+    private Vector2 velocity;
 
     public void SetVariables()
     {
@@ -33,6 +37,8 @@ public class Controls : MonoBehaviour {
 
     public void SetUFOPosition()
     {
-        ufo.transform.localPosition = GetMousePosition() * new Vector2(1, 0) + new Vector2(0, ufo.transform.localPosition.y);
+        ufo.transform.localPosition = Vector2.SmoothDamp(ufo.transform.localPosition,
+            GetMousePosition() * new Vector2(1, 0) + new Vector2(0, ufo.transform.localPosition.y),
+            ref velocity, smoothTime);
     }
 }
