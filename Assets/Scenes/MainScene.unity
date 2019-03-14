@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1875886856}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &34172446
 MonoBehaviour:
@@ -329,11 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlsScript: {fileID: 329009720}
-  gameCanvas: {fileID: 234730009}
   ufoPrefab: {fileID: 1625593507402284, guid: 885bb79fb54f94391a9f405c05e44b10, type: 2}
-  neanderthalPrefab: {fileID: 1787791217847258, guid: 23fad2157d2154392b3dd04b26738ab0,
-    type: 2}
-  dinoPrefab: {fileID: 1311609519534988, guid: 44cb11ce2a77d4d0daff4dc425745cec, type: 2}
   groundPrefab: {fileID: 1498461379384482, guid: 69da844babf8b48ca857d6caf27f7efd,
     type: 2}
 --- !u!1 &234730006
@@ -456,7 +452,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1875886856}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &329009722
 MonoBehaviour:
@@ -469,7 +465,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7dd4740bd194025af0081cb8f7a74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameCanvas: {fileID: 234730009}
+--- !u!1 &815276411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815276412}
+  - component: {fileID: 815276413}
+  m_Layer: 0
+  m_Name: GlobalVariables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &815276412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815276411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1875886856}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815276413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815276411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41030f4b7ccc642a2b120135413433c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCanvasRef: {fileID: 234730009}
 --- !u!1 &904507601
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,9 +763,54 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 34172445}
+  - {fileID: 815276412}
   - {fileID: 99894808}
+  - {fileID: 1925128026}
+  - {fileID: 34172445}
   - {fileID: 329009721}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1925128025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925128026}
+  - component: {fileID: 1925128027}
+  m_Layer: 0
+  m_Name: Runaways
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1925128026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925128025}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1875886856}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1925128027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925128025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc1ebb0f10c948a182186dfdf8698c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neanderthalPrefab: {fileID: 1787791217847258, guid: 23fad2157d2154392b3dd04b26738ab0,
+    type: 2}
+  dinoPrefab: {fileID: 1311609519534988, guid: 44cb11ce2a77d4d0daff4dc425745cec, type: 2}

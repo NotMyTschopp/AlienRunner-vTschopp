@@ -7,32 +7,25 @@
 //
 // This script manages the player controls.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Controls : MonoBehaviour {
-
-    [SerializeField] Canvas gameCanvas;
 
     private float smoothTime = 0.3f;
 
     private GameObject ufo;
 
-    private Vector2 resolution;
     private Vector2 velocity;
 
-    public void SetVariables()
+    public void SetObjects()
     {
-        ufo = GameObject.Find("UFO");
-        resolution = gameCanvas.GetComponent<CanvasScaler>().referenceResolution;
+        ufo = GameObject.Find("UFO"); // Use 'name' instead of 'tag' because there's only one UFO.
     }
 
     private Vector2 GetMousePosition()
     {
-        return new Vector2(Input.mousePosition.x / gameCanvas.scaleFactor - resolution.x / 2,
-            Input.mousePosition.y / gameCanvas.scaleFactor - resolution.y / 2);
+        return new Vector2(Input.mousePosition.x / GlobalVariables.gameCanvas.scaleFactor - GlobalVariables.resolution.x / 2,
+            Input.mousePosition.y / GlobalVariables.gameCanvas.scaleFactor - GlobalVariables.resolution.y / 2);
     }
 
     public void SetUFOPosition()

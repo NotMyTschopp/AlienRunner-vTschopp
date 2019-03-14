@@ -5,59 +5,48 @@
 // https://github.com/NotMyTschopp/AlienRunner-vTschopp
 //
 //
-// This script builds the level.
+// This script builds the level including spawing of the UFO.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour {
 
     [SerializeField] GameObject controlsScript;
 
-    [SerializeField] Canvas gameCanvas;
-
     [SerializeField] GameObject ufoPrefab;
-    [SerializeField] GameObject neanderthalPrefab;
-    [SerializeField] GameObject dinoPrefab;
     [SerializeField] GameObject groundPrefab;
 
     private GameObject ufo;
-    private GameObject neanderthal;
-    private GameObject dino;
     private GameObject ground;
 
     private Controls controls;
 
-    private int ufoPositionFromTop = 540 - 300;
+    private float ufoPositionFromTop;
 
     private void SpawnUFO()
     {
-        ufo = Instantiate(ufoPrefab, gameCanvas.transform, false);
+        ufo = Instantiate(ufoPrefab, GlobalVariables.gameCanvas.transform, false);
         ufo.transform.localPosition = new Vector2(0, ufoPositionFromTop);
 
-        ufo.name = "UFO";
-    }
-
-    private void SpawnRunaways()
-    {
-
+        ufo.name = "UFO"; // Use 'name' instead of 'tag' because there's only one UFO.
     }
 
     private void CreateGround()
     {
-        ground = Instantiate(groundPrefab, gameCanvas.transform, false);
+        ground = Instantiate(groundPrefab, GlobalVariables.gameCanvas.transform, false);
         ground.transform.localPosition = new Vector2(0, -540);
     }
 
     // Use this for initialization
     private void Start()
     {
+        controls = controlsScript.GetComponent<Controls>();
+        ufoPositionFromTop = GlobalVariables.resolution.y / 2 - 300;
+
         SpawnUFO();
         CreateGround();
 
-        controls = controlsScript.GetComponent<Controls>();
-        controls.SetVariables();
+        controls.SetObjects();
     }
 	
 	// Update is called once per frame

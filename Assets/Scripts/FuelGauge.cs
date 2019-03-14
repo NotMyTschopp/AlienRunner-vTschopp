@@ -8,8 +8,6 @@
 // This script manages the fuel of the UFO and the
 // fuel gauge drawn on the user interface.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FuelGauge : MonoBehaviour {
