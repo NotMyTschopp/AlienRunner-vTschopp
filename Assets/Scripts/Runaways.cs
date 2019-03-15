@@ -13,19 +13,117 @@ public class Runaways : MonoBehaviour {
 
     [SerializeField] GameObject neanderthalPrefab;
     [SerializeField] GameObject dinoPrefab;
+    [SerializeField] GameObject ground;
 
-    private GameObject neanderthal;
-    private GameObject dino;
+    private GameObject runaway;
+    private GameObject runawayPrefab;
 
-    // Use this for initialization
-    void Start ()
+    private bool coin;
+
+    private float timer = 2;
+    private float startPosition;
+    private float positionFromBottom;
+
+    private Vector2 speed = new Vector2(2f, 0f);
+
+    private bool flipCoin()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        if(Random.Range(0f, 1f) < 0.5f)
+        {
+            coin = true;
+        }
+        else
+        {
+            coin = false;
+        }
+
+        return coin;
+    }
+
+    private void SetPositionFromBottom(GameObject prefab)
     {
-		
-	}
+        positionFromBottom = GlobalVariables.resolution.y / 2 * (-1)
+            + prefab.GetComponent<RectTransform>().rect.height / 2
+            + ground.GetComponent<RectTransform>().rect.height / 2;
+    }
+
+    private void SetRunaway(string setRunaway)
+    {
+        if (setRunaway == "neanderthal")
+        {
+            runawayPrefab = neanderthalPrefab;
+            SetPositionFromBottom(runawayPrefab);
+        }
+        else if (setRunaway == "dino")
+        {
+            runawayPrefab = dinoPrefab;
+            SetPositionFromBottom(runawayPrefab);
+        }
+        else
+        {
+            Debug.Log("ERROR_1: Runaway '" + setRunaway + "' doesn't exist.");
+        }
+    }
+
+    private void runawayAI(GameObject[] setRunaway)
+    {
+        for(int i = 0; i < setRunaway.Length; i++)
+        {
+            if(setRunaway[i].tag == "NeanderthalLeft")
+            {
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = speed;
+            }
+            else if(setRunaway[i].tag == "NeanderthalRight")
+            {
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = speed * (-1);
+            }
+            else
+            {
+                Debug.Log("ERROR_2: No runaway with this specific tag.");
+            }
+        }
+    }
+
+    private void SpawnRunaway(string setRunaway)
+    {
+        SetRunaway(setRunaway);
+
+        if (flipCoin() == true)
+        {
+            startPosition = GlobalVariables.resolution.x / 2 * (-1)
+                - runawayPrefab.GetComponent<RectTransform>().rect.width / 2;
+
+            runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
+            runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
+
+            runaway.tag = "NeanderthalLeft";
+        }
+        else
+        {
+            startPosition = GlobalVariables.resolution.x / 2
+                + runawayPrefab.GetComponent<RectTransform>().rect.width / 2;
+
+            runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
+            runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
+
+            runaway.tag = "NeanderthalRight";
+        }
+    }
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if(timer <= 0)
+        {
+            SpawnRunaway("neanderthal");
+            timer = 2;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalLeft"));
+        runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalRight"));
+    }
 }

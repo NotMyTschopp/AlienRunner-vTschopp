@@ -814,3 +814,4 @@ MonoBehaviour:
   neanderthalPrefab: {fileID: 1787791217847258, guid: 23fad2157d2154392b3dd04b26738ab0,
     type: 2}
   dinoPrefab: {fileID: 1311609519534988, guid: 44cb11ce2a77d4d0daff4dc425745cec, type: 2}
+  ground: {fileID: 1498461379384482, guid: 69da844babf8b48ca857d6caf27f7efd, type: 2}
