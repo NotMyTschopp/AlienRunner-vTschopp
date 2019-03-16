@@ -18,6 +18,11 @@ public class GlobalVariables : MonoBehaviour {
     public static Canvas gameCanvas;
 
     public static Vector2 resolution;
+    public static Vector2 neanderthalSpeed = new Vector2(2, 0);
+    public static Vector2 dinoSpeed = new Vector2(1, 0);
+    public static Vector2 tractorBeamSpeed = new Vector2(0, 1);
+
+    public static bool tractorBeamStatus = true;
 
     // Use this for initialization
     void Start ()

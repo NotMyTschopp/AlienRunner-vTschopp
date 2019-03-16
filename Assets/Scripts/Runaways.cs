@@ -24,8 +24,6 @@ public class Runaways : MonoBehaviour {
     private float startPosition;
     private float positionFromBottom;
 
-    private Vector2 speed = new Vector2(2f, 0f);
-
     private bool flipCoin()
     {
         if(Random.Range(0f, 1f) < 0.5f)
@@ -49,12 +47,12 @@ public class Runaways : MonoBehaviour {
 
     private void SetRunaway(string setRunaway)
     {
-        if (setRunaway == "neanderthal")
+        if(setRunaway == "neanderthal")
         {
             runawayPrefab = neanderthalPrefab;
             SetPositionFromBottom(runawayPrefab);
         }
-        else if (setRunaway == "dino")
+        else if(setRunaway == "dino")
         {
             runawayPrefab = dinoPrefab;
             SetPositionFromBottom(runawayPrefab);
@@ -71,15 +69,15 @@ public class Runaways : MonoBehaviour {
         {
             if(setRunaway[i].tag == "NeanderthalLeft")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = speed;
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.neanderthalSpeed;
             }
             else if(setRunaway[i].tag == "NeanderthalRight")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = speed * (-1);
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.neanderthalSpeed * (-1);
             }
             else
             {
-                Debug.Log("ERROR_2: No runaway with this specific tag.");
+                Debug.Log("ERROR_2: No runaway with a desired tag.");
             }
         }
     }
@@ -88,7 +86,7 @@ public class Runaways : MonoBehaviour {
     {
         SetRunaway(setRunaway);
 
-        if (flipCoin() == true)
+        if(flipCoin() == true)
         {
             startPosition = GlobalVariables.resolution.x / 2 * (-1)
                 - runawayPrefab.GetComponent<RectTransform>().rect.width / 2;

@@ -48,10 +48,9 @@ public class LevelBuilder : MonoBehaviour {
 
         controls.SetObjects();
     }
-	
-	// Update is called once per frame
-	private void Update()
+
+    private void Update()
     {
-        controls.SetUFOPosition();
-	}
+        controls.SetUFOPosition(); // Init here because the UFO must exist in the first place.
+    }
 }

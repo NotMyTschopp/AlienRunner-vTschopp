@@ -8,6 +8,8 @@ TagManager:
   - NeanderthalRight
   - DinoLeft
   - DinoRight
+  - AbductedNeanderthal
+  - AbductedDino
   layers:
   - Default
   - TransparentFX

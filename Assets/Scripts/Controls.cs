@@ -14,6 +14,7 @@ public class Controls : MonoBehaviour {
     private float smoothTime = 0.3f;
 
     private GameObject ufo;
+    private GameObject tractorBeam;
 
     private Vector2 velocity;
 
@@ -22,7 +23,7 @@ public class Controls : MonoBehaviour {
         ufo = GameObject.Find("UFO"); // Use 'name' instead of 'tag' because there's only one UFO.
     }
 
-    private Vector2 GetMousePosition()
+    public Vector2 GetMousePosition()
     {
         return new Vector2(Input.mousePosition.x / GlobalVariables.gameCanvas.scaleFactor - GlobalVariables.resolution.x / 2,
             Input.mousePosition.y / GlobalVariables.gameCanvas.scaleFactor - GlobalVariables.resolution.y / 2);

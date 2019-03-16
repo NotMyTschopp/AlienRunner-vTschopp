@@ -13,6 +13,8 @@ public class RunawayBehaviour : MonoBehaviour {
 
     private int offset = 200; // Yeah, you could calculate the width of the runaway, but that's not necessary.
 
+    private GameObject ufo;
+
     private void killRunaway()
     {
         if(this.gameObject.tag == "NeanderthalLeft"
@@ -27,6 +29,18 @@ public class RunawayBehaviour : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+        else if(this.gameObject.transform.localPosition.y
+            + this.gameObject.GetComponent<RectTransform>().rect.height / 2
+            > ufo.transform.localPosition.y - ufo.GetComponent<RectTransform>().rect.height / 2)
+        {
+            Destroy(this.gameObject);
+            GlobalVariables.tractorBeamStatus = true;
+        }
+    }
+
+    private void Start()
+    {
+        ufo = GameObject.Find("UFO");
     }
 
     private void Update()
