@@ -43,7 +43,7 @@ public class Runaways : MonoBehaviour {
         }
         else
         {
-            Debug.Log("ERROR_1: Runaway '" + setRunaway + "' doesn't exist.");
+            Debug.LogError("ERROR_1: Runaway '" + setRunaway + "' doesn't exist.");
         }
     }
 
@@ -61,7 +61,7 @@ public class Runaways : MonoBehaviour {
             }
             else
             {
-                Debug.Log("ERROR_2: No runaway with a desired tag.");
+                Debug.LogError("ERROR_2: No runaway with desired tag.");
             }
         }
     }

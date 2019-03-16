@@ -33,7 +33,7 @@ public class TractorBeam : MonoBehaviour {
         }
         else
         {
-            Debug.Log("ERROR_3: No runaway with a desired tag.");
+            Debug.Log("Wrong tag. Runaway will be ignored.");
             return 2;
         }
     }
@@ -70,6 +70,18 @@ public class TractorBeam : MonoBehaviour {
         {
             collision.gameObject.tag = "AbductedDino"; // Ignore fixed update in 'Runaway.cs'!
             abductRunaway(collision.gameObject);
+        }
+        else if(Input.GetMouseButton(0) == false && collision.gameObject.tag == "AbductedNeanderthal")
+        {
+            collision.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            GlobalVariables.tractorBeamStatus = true;
+            collision.gameObject.tag = "FallingNeanderthal";
+        }
+        else if(Input.GetMouseButton(0) == false && collision.gameObject.tag == "AbductedDino")
+        {
+            collision.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            GlobalVariables.tractorBeamStatus = true;
+            collision.gameObject.tag = "FallingDino";
         }
     }
 
