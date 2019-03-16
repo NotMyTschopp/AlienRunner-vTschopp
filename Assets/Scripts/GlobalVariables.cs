@@ -17,10 +17,17 @@ public class GlobalVariables : MonoBehaviour {
 
     public static Canvas gameCanvas;
 
+    public static int fuelPercentage = 100;
+
+    public static float fuelSpeed = 0.05f;
+    public static float spawnTimeNeanderthals = 50f;
+    public static float spawnTimeDinos = 5f;
+
     public static Vector2 resolution;
-    public static Vector2 neanderthalSpeed = new Vector2(2, 0);
-    public static Vector2 dinoSpeed = new Vector2(1, 0);
-    public static Vector2 tractorBeamSpeed = new Vector2(0, 1);
+    public static Vector2 neanderthalSpeed = new Vector2(2f, 0f);
+    public static Vector2 dinoSpeed = new Vector2(1f, 0f);
+    public static Vector2 liftSpeedNeanderthal = new Vector2(0f, 1f);
+    public static Vector2 liftSpeedDino = new Vector2(0, 0.25f);
 
     public static bool tractorBeamStatus = true;
 

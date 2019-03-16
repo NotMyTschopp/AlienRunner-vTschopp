@@ -20,7 +20,9 @@ public class FuelGauge : MonoBehaviour {
     private Vector2 position = new Vector2(20, 20);
     private Vector2 size = new Vector2(200, 20);
 
-    private int fuelPercentage = new int();
+    private int fuelPercentage;
+
+    private float timer;
 
     private void drawFuelBar()
     {
@@ -44,6 +46,22 @@ public class FuelGauge : MonoBehaviour {
 
     private void Start()
     {
-        fuelPercentage = 100;
+        fuelPercentage = GlobalVariables.fuelPercentage;
+        timer = GlobalVariables.fuelSpeed;
+    }
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (Input.GetMouseButton(0) && fuelPercentage > 0)
+        {
+            if(timer < 0)
+            {
+                fuelPercentage = GlobalVariables.fuelPercentage -= 1;
+                Debug.Log("Fuel: " + GlobalVariables.fuelPercentage);
+                timer = GlobalVariables.fuelSpeed;
+            }
+        }
     }
 }

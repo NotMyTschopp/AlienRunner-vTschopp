@@ -18,7 +18,8 @@ public class Runaways : MonoBehaviour {
     private GameObject runaway;
     private GameObject runawayPrefab;
 
-    private float timer = 2;
+    private float spawnTimeNeanderthals = 2;
+    private float spawnTimeDinos = 10;
     private float startPosition;
     private float positionFromBottom;
 
@@ -31,12 +32,12 @@ public class Runaways : MonoBehaviour {
 
     private void SetRunaway(string setRunaway)
     {
-        if(setRunaway == "neanderthal")
+        if(setRunaway == "Neanderthal")
         {
             runawayPrefab = neanderthalPrefab;
             SetPositionFromBottom(runawayPrefab);
         }
-        else if(setRunaway == "dino")
+        else if(setRunaway == "Dino")
         {
             runawayPrefab = dinoPrefab;
             SetPositionFromBottom(runawayPrefab);
@@ -59,6 +60,14 @@ public class Runaways : MonoBehaviour {
             {
                 setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.neanderthalSpeed * (-1);
             }
+            else if(setRunaway[i].tag == "DinoLeft")
+            {
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.dinoSpeed;
+            }
+            else if(setRunaway[i].tag == "DinoRight")
+            {
+                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.dinoSpeed * (-1);
+            }
             else
             {
                 Debug.LogError("ERROR_2: No runaway with desired tag.");
@@ -78,7 +87,7 @@ public class Runaways : MonoBehaviour {
             runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
             runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
 
-            runaway.tag = "NeanderthalLeft";
+            runaway.tag = setRunaway + "Left";
         }
         else
         {
@@ -88,18 +97,26 @@ public class Runaways : MonoBehaviour {
             runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
             runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
 
-            runaway.tag = "NeanderthalRight";
+            runaway.tag = setRunaway + "Right";
         }
     }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
+        spawnTimeNeanderthals -= Time.deltaTime;
+        spawnTimeDinos -= Time.deltaTime;
 
-        if(timer <= 0)
+        Debug.Log("Neanderthals: " + spawnTimeNeanderthals + "; Dinos: " + spawnTimeDinos + ";");
+
+        if (spawnTimeNeanderthals < 0)
         {
-            SpawnRunaway("neanderthal");
-            timer = 2;
+            SpawnRunaway("Neanderthal");
+            spawnTimeNeanderthals = GlobalVariables.spawnTimeNeanderthals;
+        }
+        else if(spawnTimeDinos < 0)
+        {
+            SpawnRunaway("Dino");
+            spawnTimeDinos = GlobalVariables.spawnTimeDinos;
         }
     }
 
@@ -107,5 +124,7 @@ public class Runaways : MonoBehaviour {
     {
         runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalLeft"));
         runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalRight"));
+        runawayAI(GameObject.FindGameObjectsWithTag("DinoLeft"));
+        runawayAI(GameObject.FindGameObjectsWithTag("DinoRight"));
     }
 }
