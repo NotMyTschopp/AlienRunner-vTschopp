@@ -18,25 +18,9 @@ public class Runaways : MonoBehaviour {
     private GameObject runaway;
     private GameObject runawayPrefab;
 
-    private bool coin;
-
     private float timer = 2;
     private float startPosition;
     private float positionFromBottom;
-
-    private bool flipCoin()
-    {
-        if(Random.Range(0f, 1f) < 0.5f)
-        {
-            coin = true;
-        }
-        else
-        {
-            coin = false;
-        }
-
-        return coin;
-    }
 
     private void SetPositionFromBottom(GameObject prefab)
     {
@@ -86,7 +70,7 @@ public class Runaways : MonoBehaviour {
     {
         SetRunaway(setRunaway);
 
-        if(flipCoin() == true)
+        if(GlobalVariables.flipCoin() == true)
         {
             startPosition = GlobalVariables.resolution.x / 2 * (-1)
                 - runawayPrefab.GetComponent<RectTransform>().rect.width / 2;

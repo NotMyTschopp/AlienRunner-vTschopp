@@ -24,6 +24,18 @@ public class GlobalVariables : MonoBehaviour {
 
     public static bool tractorBeamStatus = true;
 
+    public static bool flipCoin()
+    {
+        if (Random.Range(0f, 1f) < 0.5f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {

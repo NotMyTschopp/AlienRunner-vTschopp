@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50940922488183560}
   - component: {fileID: 61910887531301152}
   - component: {fileID: 114346330353352638}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Neanderthal
   m_TagString: NeanderthalLeft
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

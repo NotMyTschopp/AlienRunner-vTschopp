@@ -17,24 +17,42 @@ public class RunawayBehaviour : MonoBehaviour {
 
     private void killRunaway()
     {
-        if(this.gameObject.tag == "NeanderthalLeft"
-            && this.gameObject.transform.localPosition.x
+        if(this.tag == "NeanderthalLeft"
+            && this.transform.localPosition.x
             > GlobalVariables.resolution.x / 2 + offset)
         {
             Destroy(this.gameObject);
         }
-        else if(this.gameObject.tag == "NeanderthalRight"
-            && this.gameObject.transform.localPosition.x
+        else if(this.tag == "NeanderthalRight"
+            && this.transform.localPosition.x
             < GlobalVariables.resolution.x / 2 * (-1) - offset)
         {
             Destroy(this.gameObject);
         }
-        else if(this.gameObject.transform.localPosition.y
-            + this.gameObject.GetComponent<RectTransform>().rect.height / 2
+        else if(this.transform.localPosition.y
+            + this.GetComponent<RectTransform>().rect.height / 2
             > ufo.transform.localPosition.y - ufo.GetComponent<RectTransform>().rect.height / 2)
         {
             Destroy(this.gameObject);
             GlobalVariables.tractorBeamStatus = true;
+        }
+    }
+
+    // Use OnCollisionStay2D() to avoid falling through the ground.
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(tag.Contains("Falling") == true && collision.gameObject.name == "Ground")
+        {
+            if(GlobalVariables.flipCoin() == true)
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                tag = "NeanderthalLeft";
+            }
+            else if(GlobalVariables.flipCoin() == false)
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                tag = "NeanderthalRight";
+            }
         }
     }
 

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224972148637531774}
   - component: {fileID: 222691808083752146}
   - component: {fileID: 114679701556636608}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Dino
   m_TagString: DinoLeft
   m_Icon: {fileID: 0}

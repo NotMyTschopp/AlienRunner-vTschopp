@@ -10,6 +10,8 @@ TagManager:
   - DinoRight
   - AbductedNeanderthal
   - AbductedDino
+  - FallingNeanderthal
+  - FallingDino
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - World
+  - UFO
+  - Runaways
   - 
   - 
   - 

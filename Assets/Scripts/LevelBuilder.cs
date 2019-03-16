@@ -35,6 +35,7 @@ public class LevelBuilder : MonoBehaviour {
     {
         ground = Instantiate(groundPrefab, GlobalVariables.gameCanvas.transform, false);
         ground.transform.localPosition = new Vector2(0, -540);
+        ground.name = "Ground";
     }
 
     // Use this for initialization

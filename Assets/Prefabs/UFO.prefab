@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114018981305445408}
   - component: {fileID: 61603138577516518}
   - component: {fileID: 114403821659372426}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: TractorBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 224659752458373522}
   - component: {fileID: 222944806574784674}
   - component: {fileID: 114602770689282458}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
