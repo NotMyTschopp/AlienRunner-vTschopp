@@ -59,7 +59,6 @@ public class FuelGauge : MonoBehaviour {
             if(timer < 0)
             {
                 fuelPercentage = GlobalVariables.fuelPercentage -= 1;
-                Debug.Log("Fuel: " + GlobalVariables.fuelPercentage);
                 timer = GlobalVariables.fuelSpeed;
             }
         }

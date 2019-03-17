@@ -11,10 +11,7 @@ using UnityEngine;
 
 public class TractorBeam : MonoBehaviour {
 
-    private GameObject controlsScript;
     private GameObject abductedRunaway;
-
-    private Controls controls;
 
     private float smoothTime = 0.75f;
 
@@ -22,42 +19,36 @@ public class TractorBeam : MonoBehaviour {
 
     private bool checkTag(GameObject objectToCheck)
     {
-        if(objectToCheck.tag == "NeanderthalLeft" || objectToCheck.tag == "NeanderthalRight"
-            || objectToCheck.tag == "DinoLeft" || objectToCheck.tag == "DinoRight")
+        if(objectToCheck.tag == "HumanLeft" || objectToCheck.tag == "HumanRight"
+            || objectToCheck.tag == "MammothLeft" || objectToCheck.tag == "MammothRight")
         {
             return true;
         }
         else
         {
-            Debug.Log("Tag not matching. Runaway will be ignored.");
             return false;
         }
     }
 
-    private void abductRunaway()
+    private void AbductRunaway()
     {
         GlobalVariables.tractorBeamStatus = false;
-        if(abductedRunaway.tag == "AbductedNeanderthal")
+
+        if(abductedRunaway.tag == "HumanAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.liftSpeedNeanderthal;
+            abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanLiftSpeed;
         }
-        else if(abductedRunaway.tag == "AbductedDino")
+        else if(abductedRunaway.tag == "MammothAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.liftSpeedDino;
+            abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothLiftSpeed;
         }
     }
 
-    private void setAbductedRunawayPosition()
+    private void SetAbductedRunawayPosition()
     {
         abductedRunaway.transform.localPosition = Vector2.SmoothDamp(abductedRunaway.transform.localPosition,
-            controls.GetMousePosition() * new Vector2(1, 0) + new Vector2(0, abductedRunaway.transform.localPosition.y),
+            GlobalVariables.GetMousePosition() * new Vector2(1, 0) + new Vector2(0, abductedRunaway.transform.localPosition.y),
             ref velocity, smoothTime);
-    }
-
-    private void Start()
-    {
-        controlsScript = GameObject.Find("Controls");
-        controls = controlsScript.GetComponent<Controls>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -67,44 +58,56 @@ public class TractorBeam : MonoBehaviour {
         {
             abductedRunaway = collision.gameObject;
 
-            if(abductedRunaway.tag.Contains("Neanderthal") == true)
+            if(abductedRunaway.tag.Contains("Human") == true)
             {
-                abductedRunaway.tag = "AbductedNeanderthal";
+                abductedRunaway.tag = "HumanAbducted";
             }
-            else if(abductedRunaway.tag.Contains("Dino") == true)
+            else if(abductedRunaway.tag.Contains("Mammoth") == true)
             {
-                abductedRunaway.tag = "AbductedDino";
+                abductedRunaway.tag = "MammothAbducted";
             }
 
-            abductRunaway();
+            AbductRunaway();
         }
-        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "AbductedNeanderthal")
+        else if(abductedRunaway != null && abductedRunaway.tag == "HumanAbducted" && GlobalVariables.fuelPercentage <= 0)
         {
             abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "FallingNeanderthal";
+            abductedRunaway.tag = "HumanFalling";
             GlobalVariables.tractorBeamStatus = true;
         }
-        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "AbductedDino")
+        else if(abductedRunaway != null && abductedRunaway.tag == "MammothAbducted" && GlobalVariables.fuelPercentage <= 0)
         {
             abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "FallingDino";
+            abductedRunaway.tag = "MammothFalling";
+            GlobalVariables.tractorBeamStatus = true;
+        }
+        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "HumanAbducted")
+        {
+            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            abductedRunaway.tag = "HumanFalling";
+            GlobalVariables.tractorBeamStatus = true;
+        }
+        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "MammothAbducted")
+        {
+            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            abductedRunaway.tag = "MammothFalling";
             GlobalVariables.tractorBeamStatus = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(abductedRunaway != null && abductedRunaway.tag == "AbductedNeanderthal")
+        if(abductedRunaway != null && collision.tag == "HumanAbducted")
         {
             abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             GlobalVariables.tractorBeamStatus = true;
-            abductedRunaway.tag = "FallingNeanderthal";
+            abductedRunaway.tag = "HumanFalling";
         }
-        else if(abductedRunaway != null && abductedRunaway.tag == "AbductedDino")
+        else if(abductedRunaway != null && collision.tag == "MammothAbducted")
         {
             abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             GlobalVariables.tractorBeamStatus = true;
-            abductedRunaway.tag = "FallingDino";
+            abductedRunaway.tag = "MammothFalling";
         }
     }
 
@@ -112,7 +115,7 @@ public class TractorBeam : MonoBehaviour {
     {
         if(GlobalVariables.tractorBeamStatus == false)
         {
-            setAbductedRunawayPosition();
+            SetAbductedRunawayPosition();
         }
     }
 }

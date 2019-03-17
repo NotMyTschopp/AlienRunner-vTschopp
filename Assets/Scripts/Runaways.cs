@@ -11,62 +11,51 @@ using UnityEngine;
 
 public class Runaways : MonoBehaviour {
 
-    [SerializeField] GameObject neanderthalPrefab;
-    [SerializeField] GameObject dinoPrefab;
-    [SerializeField] GameObject ground;
+    [SerializeField] GameObject groundReference;
 
-    private GameObject runaway;
     private GameObject runawayPrefab;
+    private GameObject runawayInstance;
 
-    private float spawnTimeNeanderthals = 2;
-    private float spawnTimeDinos = 10;
-    private float startPosition;
-    private float positionFromBottom;
+    private float humanSpawnTime = 2;
+    private float mammothSpawnTime = 10;
 
-    private void SetPositionFromBottom(GameObject prefab)
+    private void SetRunaway(string runaway)
     {
-        positionFromBottom = GlobalVariables.resolution.y / 2 * (-1)
-            + prefab.GetComponent<RectTransform>().rect.height / 2
-            + ground.GetComponent<RectTransform>().rect.height / 2;
-    }
-
-    private void SetRunaway(string setRunaway)
-    {
-        if(setRunaway == "Neanderthal")
+        if(runaway == "Human")
         {
-            runawayPrefab = neanderthalPrefab;
-            SetPositionFromBottom(runawayPrefab);
+            runawayPrefab = GlobalVariables.human;
+            runawayPrefab.transform.localPosition = GlobalVariables.human.transform.localPosition;
         }
-        else if(setRunaway == "Dino")
+        else if(runaway == "Mammoth")
         {
-            runawayPrefab = dinoPrefab;
-            SetPositionFromBottom(runawayPrefab);
+            runawayPrefab = GlobalVariables.mammoth;
+            runawayPrefab.transform.localPosition = GlobalVariables.mammoth.transform.localPosition;
         }
         else
         {
-            Debug.LogError("ERROR_1: Runaway '" + setRunaway + "' doesn't exist.");
+            Debug.LogError("ERROR_1: Runaway '" + runaway + "' doesn't exist.");
         }
     }
 
-    private void runawayAI(GameObject[] setRunaway)
+    private void runawayAI(GameObject[] runaway)
     {
-        for(int i = 0; i < setRunaway.Length; i++)
+        for(int i = 0; i < runaway.Length; i++)
         {
-            if(setRunaway[i].tag == "NeanderthalLeft")
+            if(runaway[i].tag == "HumanLeft")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.neanderthalSpeed;
+                runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanSpeed;
             }
-            else if(setRunaway[i].tag == "NeanderthalRight")
+            else if(runaway[i].tag == "HumanRight")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.neanderthalSpeed * (-1);
+                runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanSpeed * (-1);
             }
-            else if(setRunaway[i].tag == "DinoLeft")
+            else if(runaway[i].tag == "MammothLeft")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.dinoSpeed;
+                runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothSpeed;
             }
-            else if(setRunaway[i].tag == "DinoRight")
+            else if(runaway[i].tag == "MammothRight")
             {
-                setRunaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.dinoSpeed * (-1);
+                runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothSpeed * (-1);
             }
             else
             {
@@ -75,56 +64,48 @@ public class Runaways : MonoBehaviour {
         }
     }
 
-    private void SpawnRunaway(string setRunaway)
+    private void SpawnRunaway(string runaway)
     {
-        SetRunaway(setRunaway);
+        SetRunaway(runaway);
 
         if(GlobalVariables.flipCoin() == true)
         {
-            startPosition = GlobalVariables.resolution.x / 2 * (-1)
-                - runawayPrefab.GetComponent<RectTransform>().rect.width / 2;
+            runawayInstance = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
+            runawayInstance.transform.localPosition = runawayPrefab.transform.localPosition;
 
-            runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
-            runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
-
-            runaway.tag = setRunaway + "Left";
+            runawayInstance.tag = runaway + "Left";
         }
         else
         {
-            startPosition = GlobalVariables.resolution.x / 2
-                + runawayPrefab.GetComponent<RectTransform>().rect.width / 2;
+            runawayInstance = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
+            runawayInstance.transform.localPosition = runawayPrefab.transform.localPosition * new Vector2(-1, 1);
 
-            runaway = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
-            runaway.transform.localPosition = new Vector2(startPosition, positionFromBottom);
-
-            runaway.tag = setRunaway + "Right";
+            runawayInstance.tag = runaway + "Right";
         }
     }
 
     private void Update()
     {
-        spawnTimeNeanderthals -= Time.deltaTime;
-        spawnTimeDinos -= Time.deltaTime;
+        humanSpawnTime -= Time.deltaTime;
+        mammothSpawnTime -= Time.deltaTime;
 
-        Debug.Log("Neanderthals: " + spawnTimeNeanderthals + "; Dinos: " + spawnTimeDinos + ";");
-
-        if (spawnTimeNeanderthals < 0)
+        if (humanSpawnTime < 0)
         {
-            SpawnRunaway("Neanderthal");
-            spawnTimeNeanderthals = GlobalVariables.spawnTimeNeanderthals;
+            SpawnRunaway("Human");
+            humanSpawnTime = GlobalVariables.humanSpawnTime;
         }
-        else if(spawnTimeDinos < 0)
+        else if(mammothSpawnTime < 0)
         {
-            SpawnRunaway("Dino");
-            spawnTimeDinos = GlobalVariables.spawnTimeDinos;
+            SpawnRunaway("Mammoth");
+            mammothSpawnTime = GlobalVariables.mammothSpawnTime;
         }
     }
 
     private void FixedUpdate()
     {
-        runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalLeft"));
-        runawayAI(GameObject.FindGameObjectsWithTag("NeanderthalRight"));
-        runawayAI(GameObject.FindGameObjectsWithTag("DinoLeft"));
-        runawayAI(GameObject.FindGameObjectsWithTag("DinoRight"));
+        runawayAI(GameObject.FindGameObjectsWithTag("HumanLeft"));
+        runawayAI(GameObject.FindGameObjectsWithTag("HumanRight"));
+        runawayAI(GameObject.FindGameObjectsWithTag("MammothLeft"));
+        runawayAI(GameObject.FindGameObjectsWithTag("MammothRight"));
     }
 }

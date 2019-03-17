@@ -11,58 +11,62 @@ using UnityEngine;
 
 public class RunawayBehaviour : MonoBehaviour {
 
-    private int offset = 200; // Yeah, you could calculate the width of the runaway, but that's not necessary.
+    private int offset = 100;
 
-    private GameObject ufo;
-
-    private void killRunaway()
+    private void KillRunaway()
     {
-        if(this.tag == "NeanderthalLeft"
-            && this.transform.localPosition.x
-            > GlobalVariables.resolution.x / 2 + offset)
+        if(tag.Contains("Left") == true)
         {
-            Destroy(this.gameObject);
+            if(gameObject.transform.localPosition.x > GlobalVariables.mammoth.transform.localPosition.x * (-1) + offset)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if(this.tag == "NeanderthalRight"
-            && this.transform.localPosition.x
-            < GlobalVariables.resolution.x / 2 * (-1) - offset)
+        else if(tag.Contains("Right") == true)
         {
-            Destroy(this.gameObject);
-        }
-        else if(this.transform.localPosition.y
-            + this.GetComponent<RectTransform>().rect.height / 2
-            > ufo.transform.localPosition.y - ufo.GetComponent<RectTransform>().rect.height / 2)
-        {
-            Destroy(this.gameObject);
-            GlobalVariables.tractorBeamStatus = true;
+            if(gameObject.transform.localPosition.x < GlobalVariables.mammoth.transform.localPosition.x - offset)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     // Use OnCollisionStay2D() to avoid falling through the ground.
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(tag.Contains("Falling") == true && collision.gameObject.name == "Ground")
+        if(tag.Contains("Falling") == true && collision.gameObject.name == "GroundLayer")
         {
             if(GlobalVariables.flipCoin() == true)
             {
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                tag = "NeanderthalLeft";
+
+                if (tag.Contains("Human") == true)
+                {
+                    tag = "HumanLeft";
+                }
+                else
+                {
+                    tag = "MammothLeft";
+                }
             }
             else if(GlobalVariables.flipCoin() == false)
             {
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                tag = "NeanderthalRight";
+
+                if (tag.Contains("Human") == true)
+                {
+                    tag = "HumanRight";
+                }
+                else
+                {
+                    tag = "MammothRight";
+                }
             }
         }
     }
 
-    private void Start()
-    {
-        ufo = GameObject.Find("UFO");
-    }
-
     private void Update()
     {
-        killRunaway();
+        KillRunaway();
     }
 }

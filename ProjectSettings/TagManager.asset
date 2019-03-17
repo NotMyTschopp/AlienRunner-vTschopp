@@ -4,14 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - NeanderthalLeft
-  - NeanderthalRight
-  - DinoLeft
-  - DinoRight
-  - AbductedNeanderthal
-  - AbductedDino
-  - FallingNeanderthal
-  - FallingDino
+  - HumanLeft
+  - HumanRight
+  - MammothLeft
+  - MammothRight
+  - HumanAbducted
+  - MammothAbducted
+  - HumanFalling
+  - MammothFalling
+  - RunawayReference
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - 
   - 
   - World
-  - UFO
+  - Spaceship
   - Runaways
   - 
   - 
