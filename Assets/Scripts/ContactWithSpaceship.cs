@@ -33,6 +33,10 @@ public class ContactWithSpaceship : MonoBehaviour {
         {
             AddFuel(30);
         }
+        else
+        {
+            GlobalVariables.abductedRunaways++;
+        }
 
         Destroy(collision.gameObject);
         GlobalVariables.tractorBeamStatus = true;

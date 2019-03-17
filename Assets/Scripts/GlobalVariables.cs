@@ -26,6 +26,7 @@ public class GlobalVariables : MonoBehaviour {
     public static GameObject mammoth;
 
     public static int fuelPercentage = 100;
+    public static int abductedRunaways;
 
     public static float fuelSpeed = 0.1f; // Higher numbers result in slower consumption.
     public static float humanSpawnTime = 5f;

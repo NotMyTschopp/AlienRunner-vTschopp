@@ -13,6 +13,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
 
+    public SaveAndLoadScriptableObject saveAndLoadValues;
+
     public void StartGame()
     {
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
@@ -25,6 +27,17 @@ public class SceneLoader : MonoBehaviour {
 
     public void TryAgain()
     {
+        GlobalVariables.fuelPercentage = 100;
+        GlobalVariables.tractorBeamStatus = true;
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+    }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "MainScene" && GlobalVariables.fuelPercentage <= 0)
+        {
+            saveAndLoadValues.highscore = GlobalVariables.abductedRunaways;
+            SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
+        }
     }
 }
