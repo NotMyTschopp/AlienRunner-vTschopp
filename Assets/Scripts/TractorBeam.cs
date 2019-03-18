@@ -17,7 +17,7 @@ public class TractorBeam : MonoBehaviour {
 
     private Vector2 velocity;
 
-    private bool checkTag(GameObject objectToCheck)
+    private bool CheckTag(GameObject objectToCheck)
     {
         if(objectToCheck.tag == "HumanLeft" || objectToCheck.tag == "HumanRight"
             || objectToCheck.tag == "MammothLeft" || objectToCheck.tag == "MammothRight")
@@ -54,7 +54,7 @@ public class TractorBeam : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(Input.GetMouseButton(0) && GlobalVariables.tractorBeamStatus == true
-            && checkTag(collision.gameObject) == true && GlobalVariables.fuelPercentage > 0)
+            && CheckTag(collision.gameObject) == true && GlobalVariables.fuelPercentage > 0)
         {
             abductedRunaway = collision.gameObject;
 

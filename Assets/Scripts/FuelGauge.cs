@@ -27,7 +27,7 @@ public class FuelGauge : MonoBehaviour {
 
     private float timer;
 
-    private void drawFuelBar()
+    private void DrawFuelBar()
     {
         GUI.BeginGroup(new Rect(position.x, position.y, size.x, size.y));
 
@@ -44,7 +44,7 @@ public class FuelGauge : MonoBehaviour {
 
     private void OnGUI()
     {
-        drawFuelBar();
+        DrawFuelBar();
     }
 
     private void Start()

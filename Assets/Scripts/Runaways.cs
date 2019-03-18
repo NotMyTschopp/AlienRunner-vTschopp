@@ -37,7 +37,7 @@ public class Runaways : MonoBehaviour {
         }
     }
 
-    private void runawayAI(GameObject[] runaway)
+    private void RunawayAI(GameObject[] runaway)
     {
         for(int i = 0; i < runaway.Length; i++)
         {
@@ -103,9 +103,9 @@ public class Runaways : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        runawayAI(GameObject.FindGameObjectsWithTag("HumanLeft"));
-        runawayAI(GameObject.FindGameObjectsWithTag("HumanRight"));
-        runawayAI(GameObject.FindGameObjectsWithTag("MammothLeft"));
-        runawayAI(GameObject.FindGameObjectsWithTag("MammothRight"));
+        RunawayAI(GameObject.FindGameObjectsWithTag("HumanLeft"));
+        RunawayAI(GameObject.FindGameObjectsWithTag("HumanRight"));
+        RunawayAI(GameObject.FindGameObjectsWithTag("MammothLeft"));
+        RunawayAI(GameObject.FindGameObjectsWithTag("MammothRight"));
     }
 }
