@@ -31,9 +31,9 @@ Just clone the repo, jump into Unity (2018.2.14f1) and punch the build button.
   * [Voxel pack (base)](https://www.kenney.nl/assets/voxel-pack)
 
 ## Screenshots
-![Start Screen](./Screenshots/alien-runner_screenshot_start-screen.png)
-![Main Screen](./Screenshots/alien-runner_screenshot_main-screen.png)
-![End Screen](./Screenshots/alien-runner_screenshot_end-screen.png)
+![Start Screen](./Screenshots/alien-runner_screenshot_start-scene.png)
+![Main Screen](./Screenshots/alien-runner_screenshot_main-scene.png)
+![End Screen](./Screenshots/alien-runner_screenshot_end-scene.png)
 
 * You'll find the concept in [Screenshots](./Screenshots/alien-runner_concept.jpg).
 * You'll find a gameplay video in [Videos](./Videos/).
