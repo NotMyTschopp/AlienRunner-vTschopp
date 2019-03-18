@@ -9,8 +9,11 @@
 // fuel gauge drawn on the user interface.
 
 using UnityEngine;
+using TMPro;
 
 public class FuelGauge : MonoBehaviour {
+
+    [SerializeField] GameObject runawayCounterLabel;
 
     [SerializeField] Texture2D fuelIcon;
 
@@ -46,6 +49,7 @@ public class FuelGauge : MonoBehaviour {
 
     private void Start()
     {
+        runawayCounterLabel.GetComponent<TextMeshProUGUI>().text = GlobalVariables.abductedRunaways.ToString();
         fuelPercentage = GlobalVariables.fuelPercentage;
         timer = GlobalVariables.fuelSpeed;
     }

@@ -8,8 +8,11 @@
 // This script manages the actions when somethings hits the spaceship.
 
 using UnityEngine;
+using TMPro;
 
 public class ContactWithSpaceship : MonoBehaviour {
+
+    [SerializeField] GameObject runawayCounterLabel;
 
     // Theoretically, it would be possible that the game object is destroyed
     // and the fuel gauge is not updated. This happens because the fuel gauge
@@ -36,6 +39,7 @@ public class ContactWithSpaceship : MonoBehaviour {
         else
         {
             GlobalVariables.abductedRunaways++;
+            runawayCounterLabel.GetComponent<TextMeshProUGUI>().text = GlobalVariables.abductedRunaways.ToString();
         }
 
         Destroy(collision.gameObject);

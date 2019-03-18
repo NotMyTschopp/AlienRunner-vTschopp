@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: SaveData
   m_EditorClassIdentifier: 
   highscore: 0
+  lastRun: 0

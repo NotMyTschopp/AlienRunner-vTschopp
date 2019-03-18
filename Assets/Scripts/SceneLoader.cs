@@ -27,6 +27,7 @@ public class SceneLoader : MonoBehaviour {
 
     public void TryAgain()
     {
+        GlobalVariables.abductedRunaways = 0;
         GlobalVariables.fuelPercentage = 100;
         GlobalVariables.tractorBeamStatus = true;
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
@@ -36,7 +37,7 @@ public class SceneLoader : MonoBehaviour {
     {
         if(SceneManager.GetActiveScene().name == "MainScene" && GlobalVariables.fuelPercentage <= 0)
         {
-            saveAndLoadValues.highscore = GlobalVariables.abductedRunaways;
+            saveAndLoadValues.lastRun = GlobalVariables.abductedRunaways;
             SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
         }
     }

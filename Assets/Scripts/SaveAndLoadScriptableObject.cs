@@ -13,4 +13,5 @@ using UnityEngine;
 public class SaveAndLoadScriptableObject : ScriptableObject {
 
     public int highscore;
+    public int lastRun;
 }
