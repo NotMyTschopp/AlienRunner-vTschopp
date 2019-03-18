@@ -157,9 +157,9 @@ MonoBehaviour:
   fuelBarStyle:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 59656db30c4bf4fedbe02b4fe9b4cd76, type: 3}
+      m_Background: {fileID: 2800000, guid: ce804ad167bd246a5b84dff5396b34ac, type: 3}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 0.9372549, g: 0.9372549, b: 0.9372549, a: 1}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -189,10 +189,10 @@ MonoBehaviour:
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
+      m_Left: 6
+      m_Right: 6
+      m_Top: 6
+      m_Bottom: 6
     m_Margin:
       m_Left: 0
       m_Right: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   fuelBarStyleBackground:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: cd09b86f87a0946568d56fa5a3d1ad2f, type: 3}
+      m_Background: {fileID: 2800000, guid: 840d1acad81f1451396e856697f10f08, type: 3}
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
@@ -256,10 +256,10 @@ MonoBehaviour:
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
+      m_Left: 7
+      m_Right: 7
+      m_Top: 7
+      m_Bottom: 7
     m_Margin:
       m_Left: 0
       m_Right: 0
