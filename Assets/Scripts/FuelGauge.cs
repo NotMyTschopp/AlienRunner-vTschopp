@@ -13,49 +13,28 @@ using TMPro;
 
 public class FuelGauge : MonoBehaviour {
 
+    [SerializeField] GameObject fuelGauge;
     [SerializeField] GameObject runawayCounterLabel;
 
-    [SerializeField] Texture2D fuelIcon;
-
-    [SerializeField] GUIStyle fuelBarStyle = new GUIStyle();
-    [SerializeField] GUIStyle fuelBarStyleBackground = new GUIStyle();
-
-    private Vector2 position = new Vector2(20, 20);
-    private Vector2 size = new Vector2(200, 20);
+    private Vector2 fuelGaugeInit;
 
     private int fuelPercentage;
 
     private float timer;
 
-    private void DrawFuelBar()
-    {
-        GUI.BeginGroup(new Rect(position.x, position.y, size.x, size.y));
-
-        // Background of fuel bar.
-        GUI.Box(new Rect(0, 0, size.x, size.y), "", fuelBarStyleBackground);
-
-        // Fuel bar
-        GUI.BeginGroup(new Rect(0, 0, size.x * (fuelPercentage / 100f), size.y));
-        GUI.Box(new Rect(0, 0, size.x * (fuelPercentage / 100f), size.y), fuelPercentage + "%", fuelBarStyle);
-        GUI.EndGroup();
-
-        GUI.EndGroup();
-    }
-
-    private void OnGUI()
-    {
-        DrawFuelBar();
-    }
-
     private void Start()
     {
         runawayCounterLabel.GetComponent<TextMeshProUGUI>().text = GlobalVariables.abductedRunaways.ToString();
+        fuelGaugeInit = fuelGauge.GetComponent<RectTransform>().sizeDelta;
         fuelPercentage = GlobalVariables.fuelPercentage;
         timer = GlobalVariables.fuelSpeed;
     }
 
     private void Update()
     {
+        fuelGauge.GetComponent<RectTransform>().sizeDelta = new Vector2(fuelGaugeInit.x * GlobalVariables.fuelPercentage / 100,
+            fuelGaugeInit.y);
+
         timer -= Time.deltaTime;
 
         if (Input.GetMouseButton(0) && fuelPercentage > 0)
