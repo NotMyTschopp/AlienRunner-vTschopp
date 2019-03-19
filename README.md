@@ -1,5 +1,5 @@
 # Alien Runner 2D
-Alien Runner is a simple 2D-game developed with Unity. The player controls an alien spaceship with his mouse along the x-axis. Goal of the game is to "abduct" as many Humans as possible! Mammoths are your fuel.
+Alien Runner is a simple 2D-game developed with Unity. The player controls an alien spaceship with his mouse along the x-axis. Goal of the game is to "abduct" as many Humans as possible! Mammoths are your fuel. For detailed infos about the controls look at the latest [release](https://github.com/NotMyTschopp/AlienRunner-vTschopp/releases).
 
 **Important:** this project is a student project, it's not meant to be performant.
 
@@ -24,7 +24,7 @@ Just clone the repo, jump into Unity (2018.2.14f1) and punch the build button.
 
 ## Resources
 * [Orbitron (Font)](https://fonts.google.com/specimen/Orbitron)
-* Sprites and images by [Kenney Vleugels](https://www.kenney.nl)
+* Sprites and images by [Kenney Vleugels](https://www.kenney.nl):
   * [Alien UFO Pack](https://www.kenney.nl/assets/alien-ufo-pack)
   * [Background Elements Redux](https://www.kenney.nl/assets/background-elements-redux)
   * [UI pack](https://www.kenney.nl/assets/ui-pack)
