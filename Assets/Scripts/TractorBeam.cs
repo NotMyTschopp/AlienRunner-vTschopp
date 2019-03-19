@@ -44,6 +44,13 @@ public class TractorBeam : MonoBehaviour {
         }
     }
 
+    private void FallingRunaway(string runaway)
+    {
+        abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        abductedRunaway.tag = runaway + "Falling";
+        GlobalVariables.tractorBeamStatus = true;
+    }
+
     private void SetAbductedRunawayPosition()
     {
         abductedRunaway.transform.localPosition = Vector2.SmoothDamp(abductedRunaway.transform.localPosition,
@@ -71,27 +78,19 @@ public class TractorBeam : MonoBehaviour {
         }
         else if(abductedRunaway != null && abductedRunaway.tag == "HumanAbducted" && GlobalVariables.fuelPercentage <= 0)
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "HumanFalling";
-            GlobalVariables.tractorBeamStatus = true;
+            FallingRunaway("Human");
         }
         else if(abductedRunaway != null && abductedRunaway.tag == "MammothAbducted" && GlobalVariables.fuelPercentage <= 0)
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "MammothFalling";
-            GlobalVariables.tractorBeamStatus = true;
+            FallingRunaway("Mammoth");
         }
         else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "HumanAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "HumanFalling";
-            GlobalVariables.tractorBeamStatus = true;
+            FallingRunaway("Human");
         }
         else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "MammothAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            abductedRunaway.tag = "MammothFalling";
-            GlobalVariables.tractorBeamStatus = true;
+            FallingRunaway("Mammoth");
         }
     }
 
@@ -99,15 +98,11 @@ public class TractorBeam : MonoBehaviour {
     {
         if(abductedRunaway != null && collision.tag == "HumanAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            GlobalVariables.tractorBeamStatus = true;
-            abductedRunaway.tag = "HumanFalling";
+            FallingRunaway("Human");
         }
         else if(abductedRunaway != null && collision.tag == "MammothAbducted")
         {
-            abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            GlobalVariables.tractorBeamStatus = true;
-            abductedRunaway.tag = "MammothFalling";
+            FallingRunaway("Mammoth");
         }
     }
 
