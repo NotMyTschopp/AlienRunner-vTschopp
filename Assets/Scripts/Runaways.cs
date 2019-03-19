@@ -16,17 +16,17 @@ public class Runaways : MonoBehaviour {
     private GameObject runawayPrefab;
     private GameObject runawayInstance;
 
-    private float humanSpawnTime = 2;
-    private float mammothSpawnTime = 10;
+    private float humanSpawnTime = 2; // First time run.
+    private float mammothSpawnTime = 10; // First time run.
 
     private void SetRunaway(string runaway)
     {
-        if(runaway == "Human")
+        if(runaway == GlobalVariables.tagPrimaryRunaway)
         {
             runawayPrefab = GlobalVariables.human;
             runawayPrefab.transform.localPosition = GlobalVariables.human.transform.localPosition;
         }
-        else if(runaway == "Mammoth")
+        else if(runaway == GlobalVariables.tagSecondaryRunaway)
         {
             runawayPrefab = GlobalVariables.mammoth;
             runawayPrefab.transform.localPosition = GlobalVariables.mammoth.transform.localPosition;
@@ -41,19 +41,19 @@ public class Runaways : MonoBehaviour {
     {
         for(int i = 0; i < runaway.Length; i++)
         {
-            if(runaway[i].tag == "HumanLeft")
+            if(runaway[i].tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagLeft)
             {
                 runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanSpeed;
             }
-            else if(runaway[i].tag == "HumanRight")
+            else if(runaway[i].tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagRight)
             {
                 runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanSpeed * (-1);
             }
-            else if(runaway[i].tag == "MammothLeft")
+            else if(runaway[i].tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagLeft)
             {
                 runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothSpeed;
             }
-            else if(runaway[i].tag == "MammothRight")
+            else if(runaway[i].tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagRight)
             {
                 runaway[i].GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothSpeed * (-1);
             }
@@ -68,7 +68,7 @@ public class Runaways : MonoBehaviour {
     {
         SetRunaway(runaway);
 
-        if(GlobalVariables.flipCoin() == true)
+        if(GlobalVariables.FlipCoin() == true)
         {
             runawayInstance = Instantiate(runawayPrefab, GlobalVariables.gameCanvas.transform, false);
             runawayInstance.transform.localPosition = runawayPrefab.transform.localPosition;
@@ -91,21 +91,21 @@ public class Runaways : MonoBehaviour {
 
         if (humanSpawnTime < 0)
         {
-            SpawnRunaway("Human");
+            SpawnRunaway(GlobalVariables.tagPrimaryRunaway);
             humanSpawnTime = GlobalVariables.humanSpawnTime;
         }
         else if(mammothSpawnTime < 0)
         {
-            SpawnRunaway("Mammoth");
+            SpawnRunaway(GlobalVariables.tagSecondaryRunaway);
             mammothSpawnTime = GlobalVariables.mammothSpawnTime;
         }
     }
 
     private void FixedUpdate()
     {
-        RunawayAI(GameObject.FindGameObjectsWithTag("HumanLeft"));
-        RunawayAI(GameObject.FindGameObjectsWithTag("HumanRight"));
-        RunawayAI(GameObject.FindGameObjectsWithTag("MammothLeft"));
-        RunawayAI(GameObject.FindGameObjectsWithTag("MammothRight"));
+        RunawayAI(GameObject.FindGameObjectsWithTag(GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagLeft));
+        RunawayAI(GameObject.FindGameObjectsWithTag(GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagRight));
+        RunawayAI(GameObject.FindGameObjectsWithTag(GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagLeft));
+        RunawayAI(GameObject.FindGameObjectsWithTag(GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagRight));
     }
 }

@@ -17,7 +17,7 @@ public class SceneLoader : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     public void QuitGame()
@@ -27,18 +27,20 @@ public class SceneLoader : MonoBehaviour {
 
     public void TryAgain()
     {
+        // Reset variables
         GlobalVariables.abductedRunaways = 0;
         GlobalVariables.fuelPercentage = 100;
         GlobalVariables.tractorBeamStatus = true;
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().name == "MainScene" && GlobalVariables.fuelPercentage <= 0)
+        if(SceneManager.GetActiveScene().buildIndex == 1 && GlobalVariables.fuelPercentage <= 0)
         {
             saveAndLoadValues.lastRun = GlobalVariables.abductedRunaways;
-            SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
     }
 }

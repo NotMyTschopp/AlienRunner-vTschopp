@@ -6,7 +6,6 @@
 //
 //
 // This script manages what is displayed on the end scene (highscore).
-// If there's a '*' after the number, a new highscore is reached.
 
 using UnityEngine;
 using TMPro;
@@ -18,7 +17,7 @@ public class Highscore : MonoBehaviour {
     void Start () {
 		if(saveAndLoadValues.lastRun > saveAndLoadValues.highscore)
         {
-            GetComponent<TextMeshProUGUI>().text = saveAndLoadValues.lastRun + "*";
+            GetComponent<TextMeshProUGUI>().text = saveAndLoadValues.lastRun + "*"; // '*' indicates a new highscore.
             saveAndLoadValues.highscore = saveAndLoadValues.lastRun;
         }
         else

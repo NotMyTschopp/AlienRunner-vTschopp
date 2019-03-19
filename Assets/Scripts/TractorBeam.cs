@@ -19,8 +19,8 @@ public class TractorBeam : MonoBehaviour {
 
     private bool CheckTag(GameObject objectToCheck)
     {
-        if(objectToCheck.tag == "HumanLeft" || objectToCheck.tag == "HumanRight"
-            || objectToCheck.tag == "MammothLeft" || objectToCheck.tag == "MammothRight")
+        if(objectToCheck.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagLeft || objectToCheck.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagRight
+            || objectToCheck.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagLeft || objectToCheck.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagRight)
         {
             return true;
         }
@@ -34,11 +34,11 @@ public class TractorBeam : MonoBehaviour {
     {
         GlobalVariables.tractorBeamStatus = false;
 
-        if(abductedRunaway.tag == "HumanAbducted")
+        if(abductedRunaway.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagAbducted)
         {
             abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.humanLiftSpeed;
         }
-        else if(abductedRunaway.tag == "MammothAbducted")
+        else if(abductedRunaway.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagAbducted)
         {
             abductedRunaway.GetComponent<Rigidbody2D>().velocity = GlobalVariables.mammothLiftSpeed;
         }
@@ -47,7 +47,7 @@ public class TractorBeam : MonoBehaviour {
     private void FallingRunaway(string runaway)
     {
         abductedRunaway.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        abductedRunaway.tag = runaway + "Falling";
+        abductedRunaway.tag = runaway + GlobalVariables.tagFalling;
         GlobalVariables.tractorBeamStatus = true;
     }
 
@@ -65,44 +65,44 @@ public class TractorBeam : MonoBehaviour {
         {
             abductedRunaway = collision.gameObject;
 
-            if(abductedRunaway.tag.Contains("Human") == true)
+            if(abductedRunaway.tag.Contains(GlobalVariables.tagPrimaryRunaway) == true)
             {
-                abductedRunaway.tag = "HumanAbducted";
+                abductedRunaway.tag = GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagAbducted;
             }
-            else if(abductedRunaway.tag.Contains("Mammoth") == true)
+            else if(abductedRunaway.tag.Contains(GlobalVariables.tagSecondaryRunaway) == true)
             {
-                abductedRunaway.tag = "MammothAbducted";
+                abductedRunaway.tag = GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagAbducted;
             }
 
             AbductRunaway();
         }
-        else if(abductedRunaway != null && abductedRunaway.tag == "HumanAbducted" && GlobalVariables.fuelPercentage <= 0)
+        else if(abductedRunaway != null && abductedRunaway.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagAbducted && GlobalVariables.fuelPercentage <= 0)
         {
-            FallingRunaway("Human");
+            FallingRunaway(GlobalVariables.tagPrimaryRunaway);
         }
-        else if(abductedRunaway != null && abductedRunaway.tag == "MammothAbducted" && GlobalVariables.fuelPercentage <= 0)
+        else if(abductedRunaway != null && abductedRunaway.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagAbducted && GlobalVariables.fuelPercentage <= 0)
         {
-            FallingRunaway("Mammoth");
+            FallingRunaway(GlobalVariables.tagSecondaryRunaway);
         }
-        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "HumanAbducted")
+        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagAbducted)
         {
-            FallingRunaway("Human");
+            FallingRunaway(GlobalVariables.tagPrimaryRunaway);
         }
-        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == "MammothAbducted")
+        else if(Input.GetMouseButton(0) == false && abductedRunaway != null && abductedRunaway.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagAbducted)
         {
-            FallingRunaway("Mammoth");
+            FallingRunaway(GlobalVariables.tagSecondaryRunaway);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(abductedRunaway != null && collision.tag == "HumanAbducted")
+        if(abductedRunaway != null && collision.tag == GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagAbducted)
         {
-            FallingRunaway("Human");
+            FallingRunaway(GlobalVariables.tagPrimaryRunaway);
         }
-        else if(abductedRunaway != null && collision.tag == "MammothAbducted")
+        else if(abductedRunaway != null && collision.tag == GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagAbducted)
         {
-            FallingRunaway("Mammoth");
+            FallingRunaway(GlobalVariables.tagSecondaryRunaway);
         }
     }
 

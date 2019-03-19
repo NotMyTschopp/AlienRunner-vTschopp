@@ -11,18 +11,20 @@ using UnityEngine;
 
 public class RunawayBehaviour : MonoBehaviour {
 
+    [SerializeField] GameObject ground;
+
     private int offset = 100;
 
     private void KillRunaway()
     {
-        if(tag.Contains("Left") == true)
+        if(tag.Contains(GlobalVariables.tagLeft) == true)
         {
             if(gameObject.transform.localPosition.x > GlobalVariables.mammoth.transform.localPosition.x * (-1) + offset)
             {
                 Destroy(gameObject);
             }
         }
-        else if(tag.Contains("Right") == true)
+        else if(tag.Contains(GlobalVariables.tagRight) == true)
         {
             if(gameObject.transform.localPosition.x < GlobalVariables.mammoth.transform.localPosition.x - offset)
             {
@@ -34,32 +36,32 @@ public class RunawayBehaviour : MonoBehaviour {
     // Use OnCollisionStay2D() to avoid falling through the ground.
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(tag.Contains("Falling") == true && collision.gameObject.name == "GroundLayer")
+        if(tag.Contains(GlobalVariables.tagFalling) == true && collision.gameObject == ground)
         {
-            if(GlobalVariables.flipCoin() == true)
+            if(GlobalVariables.FlipCoin() == true)
             {
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
-                if (tag.Contains("Human") == true)
+                if (tag.Contains(GlobalVariables.tagPrimaryRunaway) == true)
                 {
-                    tag = "HumanLeft";
+                    tag = GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagLeft;
                 }
                 else
                 {
-                    tag = "MammothLeft";
+                    tag = GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagLeft;
                 }
             }
-            else if(GlobalVariables.flipCoin() == false)
+            else if(GlobalVariables.FlipCoin() == false)
             {
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
-                if (tag.Contains("Human") == true)
+                if (tag.Contains(GlobalVariables.tagPrimaryRunaway) == true)
                 {
-                    tag = "HumanRight";
+                    tag = GlobalVariables.tagPrimaryRunaway + GlobalVariables.tagRight;
                 }
                 else
                 {
-                    tag = "MammothRight";
+                    tag = GlobalVariables.tagSecondaryRunaway + GlobalVariables.tagRight;
                 }
             }
         }

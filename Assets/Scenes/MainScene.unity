@@ -336,6 +336,11 @@ Prefab:
       propertyPath: mammothReference
       value: 
       objectReference: {fileID: 1446992332}
+    - target: {fileID: 114054067089776210, guid: 7823e471a1ae04652a8bb8b32055a408,
+        type: 2}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 1807151916}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7823e471a1ae04652a8bb8b32055a408, type: 2}
   m_IsPrefabAsset: 0
@@ -748,6 +753,11 @@ Prefab:
       propertyPath: mammothReference
       value: 
       objectReference: {fileID: 1446992332}
+    - target: {fileID: 114574179241573056, guid: 0ae8896efc9564db5ba17808d398d122,
+        type: 2}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 1807151916}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae8896efc9564db5ba17808d398d122, type: 2}
   m_IsPrefabAsset: 0

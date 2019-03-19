@@ -26,15 +26,15 @@ public class ContactWithSpaceship : MonoBehaviour {
         }
         else
         {
-            GlobalVariables.fuelPercentage = 100;
+            GlobalVariables.fuelPercentage = 100; // Although it's a "magical value" it's easier to read this way.
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag.Contains("Mammoth") == true)
+        if(collision.tag.Contains(GlobalVariables.tagSecondaryRunaway) == true)
         {
-            AddFuel(30);
+            AddFuel(GlobalVariables.fuelToAdd);
         }
         else
         {
